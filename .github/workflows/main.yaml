@@ -3,13 +3,12 @@ name: client
 on: [pull_request, push]
 
 jobs:
-  defaults:
-    run:
-      working-directory: client
-
   build:
     runs-on: ubuntu-latest
-
+    defaults:
+      run:
+        working-directory: client
+        
     steps:
       - uses: actions/checkout@v2
 
