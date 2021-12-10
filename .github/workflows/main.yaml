@@ -3,6 +3,10 @@ name: client
 on: [pull_request, push]
 
 jobs:
+  defaults:
+    run:
+      working-directory: client
+
   build:
     runs-on: ubuntu-latest
 
@@ -11,9 +15,6 @@ jobs:
 
       - uses: subosito/flutter-action@v1.5.3
 
-      - name: Set client dir environment var
-        run: echo ::set-env name=PROJECT_DIR::"$GITHUB_WORKSPACE/client"
-        
       - name: Install Dependencies
         run: flutter packages get
 
