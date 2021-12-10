@@ -11,7 +11,7 @@ jobs:
 
       - uses: subosito/flutter-action@v1.5.3
       - name: Navigate to client directory
-        run: pwd && ls -la
+        run: cd ./client && pwd && ls -la
       - name: Install Dependencies
         run: flutter packages get
 
