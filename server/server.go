@@ -12,12 +12,12 @@ import (
 func main() {
 	r := mux.NewRouter()
 	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Println("welcome")
+		fmt.Fprintf(w, "welcome")
 	})
 	http.Handle("/", r)
 	srv := &http.Server{
 		Handler: r,
-		Addr:    "127.0.0.1:8080",
+		Addr:    "0.0.0.0:8080",
 		// Good practice: enforce timeouts for servers you create!
 		WriteTimeout: 15 * time.Second,
 		ReadTimeout:  15 * time.Second,

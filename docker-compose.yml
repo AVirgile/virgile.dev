@@ -1,0 +1,19 @@
+version: "3.9"
+
+services:
+  server:
+    build:
+      context: ./server
+    ports:
+      - 8080:8080
+    volumes:
+      - .:/server
+    container_name: server
+    # environment:
+    #   - 'DB_PORT=3306' add variable like .env in there
+    #   - 'DB_HOST=database'
+
+  client:
+    build: ./client
+    ports:
+      - "80:80"
