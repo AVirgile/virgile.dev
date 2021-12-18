@@ -10,6 +10,7 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/widgets.dart';
+import 'package:url_strategy/url_strategy.dart';
 
 class AppBlocObserver extends BlocObserver {
   @override
@@ -33,7 +34,10 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   await runZonedGuarded(
     () async {
       await BlocOverrides.runZoned(
-        () async => runApp(await builder()),
+        () async {
+          setPathUrlStrategy();
+          runApp(await builder());
+        },
         blocObserver: AppBlocObserver(),
       );
     },
