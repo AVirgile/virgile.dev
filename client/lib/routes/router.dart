@@ -89,7 +89,9 @@ class HomeRouterDelegate extends RouterDelegate<HomeRoutePath>
 
   @override
   Widget build(BuildContext context) {
-    querySelector('#loader')!.remove();
+    if (querySelector('#loader') != null) {
+      querySelector('#loader')!.remove();
+    }
     if (isError) {
       return const Unkown();
     }
