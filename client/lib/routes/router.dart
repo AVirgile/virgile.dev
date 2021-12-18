@@ -1,7 +1,5 @@
-import 'dart:html';
-
 import 'package:client/home/home.dart';
-import 'package:client/unknow/unknow.dart';
+import 'package:client/unkown/unkown.dart';
 import 'package:flutter/material.dart';
 
 class HomeRoutePath {
@@ -89,9 +87,6 @@ class HomeRouterDelegate extends RouterDelegate<HomeRoutePath>
 
   @override
   Widget build(BuildContext context) {
-    if (querySelector('#loader') != null) {
-      querySelector('#loader')!.remove();
-    }
     if (isError) {
       return const Unkown();
     }
@@ -99,7 +94,6 @@ class HomeRouterDelegate extends RouterDelegate<HomeRoutePath>
       return pageHandle(pathName: pathName);
     }
     // ignore: prefer_const_constructors
-    print("hello world");
     return Home();
   }
 

@@ -30,3 +30,4 @@ jobs:
         uses: VeryGoodOpenSource/very_good_coverage@v1.2.0
         with:
           path: './client/coverage/lcov.info'
+          min_coverage: 80

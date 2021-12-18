@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 class Unkown extends StatelessWidget {
   const Unkown({Key? key}) : super(key: key);
 
-  static Page page() => const MaterialPage<void>(child: Unkown());
-
   @override
   Widget build(BuildContext context) {
     return const UnkownForm();
