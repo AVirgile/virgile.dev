@@ -23,7 +23,8 @@ class HomeRoutePath {
 class HomeRouteInformationParser extends RouteInformationParser<HomeRoutePath> {
   @override
   Future<HomeRoutePath> parseRouteInformation(
-      RouteInformation routeInformation) async {
+    RouteInformation routeInformation,
+  ) async {
     final uri = Uri.parse(routeInformation.location!);
 
     if (uri.pathSegments.isEmpty) {
