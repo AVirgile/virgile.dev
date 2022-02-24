@@ -1,3 +1,4 @@
+import 'package:client/about/about.dart';
 import 'package:client/home/home.dart';
 import 'package:client/unkown/unkown.dart';
 import 'package:flutter/material.dart';
@@ -80,7 +81,8 @@ class HomeRouterDelegate extends RouterDelegate<HomeRoutePath>
     if (pathName == null) return const Unkown();
     switch (pathName) {
       case 'about':
-        return const Text('about');
+        // ignore: prefer_const_constructors
+        return About();
       default:
         return const Unkown();
     }

@@ -5,9 +5,11 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
+import 'package:client/app/bloc/bloc/router_bloc.dart';
 import 'package:client/l10n/l10n.dart';
 import 'package:client/routes/router.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 class App extends StatelessWidget {
@@ -15,8 +17,15 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // ignore: prefer_const_constructors
-    return AppComponent();
+    return BlocProvider(
+      create: (context) => RouterBloc(),
+      child: BlocBuilder<RouterBloc, RouterState>(
+        builder: (context, state) {
+          // ignore: prefer_const_constructors
+          return AppComponent();
+        },
+      ),
+    );
   }
 }
 
@@ -37,6 +46,11 @@ class AppComponent extends StatelessWidget {
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
       ],
+      routeInformationProvider: PlatformRouteInformationProvider(
+        initialRouteInformation: RouteInformation(
+          location: context.read<RouterBloc>().state.currentRoute,
+        ),
+      ),
       supportedLocales: AppLocalizations.supportedLocales,
       routerDelegate: HomeRouterDelegate(),
       routeInformationParser: HomeRouteInformationParser(),
