@@ -26,7 +26,12 @@ class HomeForm extends StatelessWidget {
           primary: Theme.of(context).primaryColor,
         ),
         onPressed: () {
-          context.read<RouterBloc>().add(const RouteChange(newRoute: '/about'));
+          context.read<RouterBloc>().add(
+                const RouteChange(
+                  newRoute: '/about',
+                  rebuild: true,
+                ),
+              );
         },
         child: const Text(
           'Go to about',

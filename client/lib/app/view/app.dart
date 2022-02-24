@@ -20,6 +20,9 @@ class App extends StatelessWidget {
     return BlocProvider(
       create: (context) => RouterBloc(),
       child: BlocBuilder<RouterBloc, RouterState>(
+        buildWhen: (prev, current) {
+          return current.triggerRebuild;
+        },
         builder: (context, state) {
           // ignore: prefer_const_constructors
           return AppComponent();

@@ -1,7 +1,9 @@
 import 'package:client/about/about.dart';
+import 'package:client/app/bloc/bloc/router_bloc.dart';
 import 'package:client/home/home.dart';
 import 'package:client/unkown/unkown.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeRoutePath {
   HomeRoutePath.home()
@@ -31,7 +33,6 @@ class HomeRouteInformationParser extends RouteInformationParser<HomeRoutePath> {
     if (uri.pathSegments.isEmpty) {
       return HomeRoutePath.home();
     }
-
     if (uri.pathSegments.length == 1) {
       final pathName = uri.pathSegments.elementAt(0);
       //if (pathName == null) return HomeRoutePath.unKown();
@@ -77,7 +78,7 @@ class HomeRouterDelegate extends RouterDelegate<HomeRoutePath>
     notifyListeners();
   }
 
-  Widget pageHandle({String? pathName}) {
+  Widget pageHandle({String? pathName, required BuildContext context}) {
     if (pathName == null) return const Unkown();
     switch (pathName) {
       case 'about':
@@ -90,11 +91,22 @@ class HomeRouterDelegate extends RouterDelegate<HomeRoutePath>
 
   @override
   Widget build(BuildContext context) {
+    final bloc = BlocProvider.of<RouterBloc>(context);
+
+    if (pathName != null && bloc.state.currentRoute != pathName) {
+      bloc.add(
+        RouteChange(
+          newRoute: pathName!,
+          rebuild: false,
+        ),
+      );
+    }
+
     if (isError) {
       return const Unkown();
     }
     if (pathName != null) {
-      return pageHandle(pathName: pathName);
+      return pageHandle(pathName: pathName, context: context);
     }
     // ignore: prefer_const_constructors
     return Home();

@@ -8,7 +8,8 @@ abstract class RouterEvent extends Equatable {
 }
 
 class RouteChange extends RouterEvent {
-  const RouteChange({required this.newRoute}) : super();
+  const RouteChange({required this.newRoute, required this.rebuild}) : super();
 
   final String newRoute;
+  final bool rebuild;
 }

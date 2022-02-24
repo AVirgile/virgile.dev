@@ -5,7 +5,7 @@ part 'router_event.dart';
 part 'router_state.dart';
 
 class RouterBloc extends Bloc<RouterEvent, RouterState> {
-  RouterBloc() : super(const RouterInitial()) {
+  RouterBloc() : super(RouterInitial()) {
     on<RouteChange>(_onRouteChange);
   }
   Future<void> _onRouteChange(
@@ -13,6 +13,11 @@ class RouterBloc extends Bloc<RouterEvent, RouterState> {
     Emitter<RouterState> emit,
   ) async {
     if (state.currentRoute == event.newRoute) return;
-    emit(state.copyWith(currentRoute: event.newRoute));
+    emit(
+      state.copyWith(
+        currentRoute: event.newRoute,
+        triggerRebuild: event.rebuild,
+      ),
+    );
   }
 }
